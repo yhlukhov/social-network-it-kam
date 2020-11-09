@@ -1,3 +1,28 @@
+/* dialogs */
+
 .dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
     font-size: large;
+}
+
+.dialogsItems {
+    padding: 10px;
+}
+.dialogsItems .active {
+    font-weight: bold;
+}
+
+.dialog {
+
+}
+
+/* messages */
+
+.messages {
+    padding: 10px;
+}
+
+.message {
+
 }
