@@ -1,0 +1,19 @@
+.posts {
+   
+}
+
+.addPost {
+   display: flex;
+}
+.addPost textarea {
+   font-size: large;
+   width: 200px;
+   border: 1px solid lightblue;
+   border-bottom-left-radius: 5px;
+   border-top-left-radius: 5px;
+}
+.addPost button {
+   border: 1px solid lightblue;
+   border-bottom-right-radius: 5px;
+   border-top-right-radius: 5px;
+}

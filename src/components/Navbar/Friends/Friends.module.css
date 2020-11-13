@@ -1,0 +1,24 @@
+h3 {
+   font-size: 1.4rem;
+   font-weight: normal;
+   margin-bottom: 5px;
+}
+
+.friends {
+   color: darkkhaki;
+   margin-top: 20px;
+}
+
+.friendsList {
+   display: flex;
+}
+
+.friend {
+   padding: 5px;
+   text-align: center;
+}
+
+.friend img {
+   width: 50px;
+   border-radius: 50%;
+}

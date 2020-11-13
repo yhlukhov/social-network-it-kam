@@ -1,0 +1,18 @@
+.dialog {
+   padding: 3px;
+}
+.dialog a {
+   color: darkkhaki;
+   text-decoration: none;
+}
+
+.userItem {
+   display: flex;
+   align-items: center;
+}
+.userItem img {
+   width: 40px;
+}
+.userItem .userName {
+   padding: 4px;
+}
