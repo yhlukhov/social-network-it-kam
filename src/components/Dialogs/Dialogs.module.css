@@ -23,14 +23,3 @@
     margin-top: 20px;
     display: flex;
 }
-.newMessage textarea {
-    width: 200px;
-    border: 1px solid lightblue;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-}
-.newMessage button {
-    border: 1px solid lightblue;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-}
