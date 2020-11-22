@@ -5,28 +5,58 @@ import {
 } from "../../redux/dialogsReducer";
 import styled, { css } from "styled-components";
 import Dialogs from "./Dialogs";
+import {connect} from 'react-redux';
 
-const DialogsContainer = (props) => {
-   let state = props.store.getState().messagesPage;
+// function DialogsContainer() {
 
-   const onNewMessageChange = (messageText) => {
-      props.store.dispatch(onNewMessageChangeActionCreator(messageText));
-   };
+//    return (
+//       <StoreContext.Consumer>
+//          {(store) => {
+//             let state = store.getState().messagesPage;
 
-   const onSendMessageClick = () => {
-      props.store.dispatch(onSendMessageClickActionCreator());
-   };
+//             const onNewMessageChange = (messageText) => {
+//                store.dispatch(onNewMessageChangeActionCreator(messageText));
+//             };
 
-   return (
-      <Dialogs
-         dialogs={state.dialogs}
-         messages={state.messages}
-         newMessageText={state.newMessageText}
-         newMessageChange={onNewMessageChange}
-         sendMessage={onSendMessageClick}
-      />
-   );
-};
+//             const onSendMessageClick = () => {
+//                store.dispatch(onSendMessageClickActionCreator());
+//             };
+
+//             return (
+//                <Dialogs
+//                   dialogs={state.dialogs}
+//                   messages={state.messages}
+//                   newMessageText={state.newMessageText}
+//                   newMessageChange={onNewMessageChange}
+//                   sendMessage={onSendMessageClick} />
+//             );
+//          } }
+//       </StoreContext.Consumer>
+//    );
+// }
+
+///////////////////////////////////////////////
+
+const mapStateToProps = (state) => {
+   debugger
+   return {
+      dialogs: state.messagesPage.dialogs,
+      messages: state.messagesPage.messages,
+      newMessageText: state.messagesPage.newMessageText
+   }
+}
+const mapDispatchToProps = (dispatch) => {
+   return {
+      newMessageChange: (messageText)=>{
+         dispatch(onNewMessageChangeActionCreator(messageText))
+      },
+      sendMessage: ()=>{
+         dispatch(onSendMessageClickActionCreator())
+      }
+   }
+}
+
+const SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 //* ------------ BLOCK CSS ------------- //
 
@@ -56,4 +86,4 @@ const ButtonSend = styled.button`
 
 //* ------------ EXPORT ------------- //
 
-export default DialogsContainer;
+export default SuperDialogsContainer;

@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route } from "react-router-dom";
-import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
 import Music from "./components/Music/Music";
 import Navbar from "./components/Navbar/Navbar";
@@ -11,46 +10,23 @@ import StyledComponents from "./components/StyledComponents/StyledComponents";
 import StyledComponents2 from "./components/StyledComponents/StyledComponents2";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-function App(props) {
-  return (
-    <div className="app-wrapper">
-      <Header />
-      <Navbar state={props.state.sidebar} />
-      <div className="app-wrapper-content">
-        <Route
-          exact path="/"
-          render={() => (
-            <Profile
-              store={props.store}
-            />
-          )}
-        />
-        <Route
-          path="/profile"
-          render={() => (
-            <Profile
-              store={props.store}
-            />
-          )}
-        />
-        <Route
-          path="/dialogs"
-          render={() => (
-            <DialogsContainer
-              store={props.store}
-              // messagesPage={props.state.messagesPage}
-              // dispatch={props.dispatch}
-            />
-          )}
-        />
-        <Route path="/news" render={() => <News />} />
-        <Route path="/music" render={() => <Music />} />
-        <Route path="/settings" render={() => <Settings />} />
-        <Route path="/styled" render={() => <StyledComponents />} />
-        <Route path="/styled2" render={() => <StyledComponents2 />} />
+function App() {
+   return (
+      <div className="app-wrapper">
+         <Header />
+         <Navbar />
+         <div className="app-wrapper-content">
+            <Route exact path="/" render={() => <Profile />} />
+            <Route path="/profile" render={() => <Profile />} />
+            <Route path="/dialogs" render={() => <DialogsContainer />} />
+            <Route path="/news" render={() => <News />} />
+            <Route path="/music" render={() => <Music />} />
+            <Route path="/settings" render={() => <Settings />} />
+            <Route path="/styled" render={() => <StyledComponents />} />
+            <Route path="/styled2" render={() => <StyledComponents2 />} />
+         </div>
       </div>
-    </div>
-  );
+   );
 }
 
 export default App;

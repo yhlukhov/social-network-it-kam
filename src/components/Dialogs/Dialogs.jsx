@@ -9,6 +9,7 @@ let messageRef = React.createRef()
 
 
 const Dialogs = (props) => {
+  
   const dialogItems = props.dialogs.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} img={dialog.img} />
   ));
