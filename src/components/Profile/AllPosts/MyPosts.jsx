@@ -10,6 +10,7 @@ const MyPosts = (props) => {
     return (
        <Post
           id={post.id}
+          key={post.id}
           message={post.message}
           img={post.img}
           likesCount={post.likesCount}

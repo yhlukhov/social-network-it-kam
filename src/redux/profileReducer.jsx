@@ -27,27 +27,29 @@ let initialState = {
          likesCount: 6,
       },
    ],
-   newPostText: "",
+   newPostText: "it-kamasutra",
 }
 
 const profileReducer = (state = initialState, action) => {
+
    switch (action.type) {
       case ADD_POST:
-         {
-            const post_obj = {
+         return {
+            ...state,
+            newPostText: '',
+            posts: [...state.posts, {
                id: 5,
                img: faker.image.avatar(),
                message: state.newPostText,
-               likesCount: 0,
-            };
-            state.posts.push(post_obj);
-            state.newPostText = "";
-            return state
+               likesCount: 0
+            }]
          }
+         
       case SET_NEW_POST_TEXT:
-         {
-            state.newPostText = action.newPostText;
-            return state
+         return {
+            ...state,
+            posts: [...state.posts],
+            newPostText: action.newPostText
 			}
 		default: return state
 	}

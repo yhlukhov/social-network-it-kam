@@ -8,13 +8,19 @@ let messageRef = React.createRef()
 
 
 
-const Dialogs = (props) => {
+const Dialogs = ({
+  dialogs,
+  messages,
+  newMessageText,
+  newMessageChange,
+  sendMessage
+}) => {
   
-  const dialogItems = props.dialogs.map((dialog) => (
-    <DialogItem name={dialog.name} id={dialog.id} img={dialog.img} />
+  const dialogItems = dialogs.map((dialog) => (
+    <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} img={dialog.img} />
   ));
-  const messageItems = props.messages.map((message) => (
-    <Message id={message.id} message={message.message} />
+  const messageItems = messages.map((message) => (
+    <Message id={message.id} key={message.id} message={message.message} />
   ));
 
   return (
@@ -23,10 +29,10 @@ const Dialogs = (props) => {
       <div className={style.messages}>
         {messageItems}
         <div className={style.newMessage}>
-          <Textarea ref={messageRef} value={props.newMessageText}
-            onChange={()=>props.newMessageChange(messageRef.current.value)}
+          <Textarea ref={messageRef} value={newMessageText}
+            onChange={()=>newMessageChange(messageRef.current.value)}
           ></Textarea>
-          <ButtonSend onClick={props.sendMessage} primary>Send message</ButtonSend>
+          <ButtonSend onClick={sendMessage} primary>Send message</ButtonSend>
         </div>
       </div>
     </div>

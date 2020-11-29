@@ -9,6 +9,7 @@ import Settings from "./components/Settings/Settings";
 import StyledComponents from "./components/StyledComponents/StyledComponents";
 import StyledComponents2 from "./components/StyledComponents/StyledComponents2";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 function App() {
    return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/" render={() => <Profile />} />
             <Route path="/profile" render={() => <Profile />} />
             <Route path="/dialogs" render={() => <DialogsContainer />} />
+            <Route path="/users" render={() => <UsersContainer />} />
             <Route path="/news" render={() => <News />} />
             <Route path="/music" render={() => <Music />} />
             <Route path="/settings" render={() => <Settings />} />

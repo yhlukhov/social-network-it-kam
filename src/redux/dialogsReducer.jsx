@@ -52,28 +52,36 @@ let initialState = {
          img: faker.image.avatar(),
       },
    ],
-}
+};
 
 const dialogsReducer = (state = initialState, action) => {
+
    switch (action.type) {
       case SEND_MESSAGE: {
-         const message_obj = {
-            id: state.messages.length + 1,
-            message: state.newMessageText,
-         };
-         state.messages.push(message_obj);
-         state.newMessageText = "";
-         return state;
+         return {
+            ...state,
+            newMessageText: "",
+            messages: [...state.messages, {
+               id: state.messages.length + 1,
+               message: state.newMessageText
+            }]
+         }
       }
       case SET_NEW_MESSAGE_TEXT: {
-         state.newMessageText = action.newMessageText;
-         return state;
+         const stateCopy = {
+            ...state,
+            newMessageText: state.newMessageText
+         };
+         stateCopy.newMessageText = action.newMessageText;
+         return {
+            ...state,
+            
+         }
       }
       default:
          return state;
    }
 };
-
 
 export const onSendMessageClickActionCreator = () => {
    return {
@@ -87,6 +95,5 @@ export const onNewMessageChangeActionCreator = (text) => {
       newMessageText: text,
    };
 };
-
 
 export default dialogsReducer;
