@@ -1,59 +1,69 @@
-import Axios from "axios";
 import React from "react";
 import styled from "styled-components";
+import css from "./Users.module.css";
 import userAva from "../../assets/images/ava.png";
+import { NavLink } from "react-router-dom";
 
-class Users extends React.Component {
-
-   componentDidMount = () => {
-      Axios.get("https://social-network.samuraijs.com/api/1.0/users").then((resp) => {
-         this.props.setUsers(resp.data.items);
-      });
+const Users = (props) => {
+   let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
+   let pages = [];
+   for (let i = 1; i <= pageCount; i++) {
+      pages.push(i);
    }
 
-   render() {
-      return (
-         <Container>
-            {this.props.users.map((user) => {
-               return (
-                  <User key={user.id}>
-                     <Avatar>
+   return (
+      <Container>
+         <Paginator>
+            {pages.map((p) => (
+               <PageNumber
+                  onClick={() => props.onPageChange(p)}
+                  className={props.currentPage === p && css.selectedPage}
+               >
+                  {p}
+               </PageNumber>
+            ))}
+         </Paginator>
+         {props.users.map((user) => {
+            return (
+               <User key={user.id}>
+                  <Avatar>
+                     <NavLink to={`/profile/${user.id}`}>
                         <Image src={user.photos.small ? user.photos.small : userAva} alt="avatar" />
-                        {user.follow ? (
-                           <Unfollow
-                              onClick={() => {
-                                 this.props.unfollow(user.id);
-                              }}
-                           >
-                              Unfollow
-                           </Unfollow>
-                        ) : (
-                           <Follow
-                              onClick={() => {
-                                 this.props.follow(user.id);
-                              }}
-                           >
-                              Follow
-                           </Follow>
-                        )}
-                     </Avatar>
-                     <Details>
-                        <UserData>
-                           <Name>{user.name}</Name>
-                           <Status>{user.status ? user.status : "user.status"}</Status>
-                        </UserData>
-                        <Location>
-                           <Country>{"user.location.country"}</Country>
-                           <City>{"user.location.city"}</City>
-                        </Location>
-                     </Details>
-                  </User>
-               );
-            })}
-         </Container>
-      );
-   }
-}
+                     </NavLink>
+                     {user.follow ? (
+                        <Unfollow
+                           onClick={() => {
+                              props.unfollow(user.id);
+                           }}
+                        >
+                           Unfollow
+                        </Unfollow>
+                     ) : (
+                        <Follow
+                           onClick={() => {
+                              props.follow(user.id);
+                           }}
+                        >
+                           Follow
+                        </Follow>
+                     )}
+                  </Avatar>
+                  <Details>
+                     <UserData>
+                        <Name>{user.name}</Name>
+                        <Status>{user.status ? user.status : "user.status"}</Status>
+                     </UserData>
+                     <Location>
+                        <Country>{"user.location.country"}</Country>
+                        <City>{"user.location.city"}</City>
+                     </Location>
+                  </Details>
+               </User>
+            );
+         })}
+      </Container>
+   );
+};
 
 export default Users;
 
@@ -116,4 +126,13 @@ const Country = styled.div`
 `;
 const City = styled.div`
    font-size: 1.3em;
+`;
+const Paginator = styled.div`
+   display: flex;
+   justify-content: center;
+`;
+const PageNumber = styled.span`
+   font-size: x-small;
+   margin: 1px;
+   cursor: pointer;
 `;

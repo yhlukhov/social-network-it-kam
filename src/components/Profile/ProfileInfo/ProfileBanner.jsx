@@ -4,7 +4,7 @@ import css from './ProfileBanner.module.css'
 const ProfileBanner = (props) => {
    return (
       <div>
-         <img className={css.mainImg} src={props.img}></img>
+         <img className={css.mainImg} src={props.img} alt="Profile"></img>
       </div>
    )
 }
