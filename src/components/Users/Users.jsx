@@ -27,7 +27,7 @@ const Users = (props) => {
             return (
                <User key={user.id}>
                   <Avatar>
-                     <NavLink to={`/profile/${user.id}`}>
+                     <NavLink to={{pathname:`/profile/${user.id}`, state: {user}}}>
                         <Image src={user.photos.small ? user.photos.small : userAva} alt="avatar" />
                      </NavLink>
                      {user.follow ? (

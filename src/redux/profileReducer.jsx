@@ -28,6 +28,7 @@ let initialState = {
       },
    ],
    newPostText: "it-kamasutra",
+   userProfile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -50,7 +51,12 @@ const profileReducer = (state = initialState, action) => {
             ...state,
             posts: [...state.posts],
             newPostText: action.newPostText
-			}
+         }
+      case 'SET_USER_PROFILE':
+         return {
+            ...state,
+            userProfile: action.userProfile
+         }
 		default: return state
 	}
 };
@@ -66,6 +72,13 @@ export const setNewPostTextActionCreator = (text) => {
       newPostText: text,
    };
 };
+
+export const setUserProfile = (userProfile) => {
+	return {
+		type: 'SET_USER_PROFILE',
+		userProfile
+	}
+}
 
 
 export default profileReducer

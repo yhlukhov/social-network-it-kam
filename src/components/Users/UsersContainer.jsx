@@ -24,10 +24,6 @@ class UsersContainer extends React.Component {
       });
    };
 
-   componentDidUpdate = () => {
-      console.log(this.props.loading);
-   };
-
    onPageChange = (p) => {
       this.props.setCurrentPage(p);
       this.props.loadPage(true);
