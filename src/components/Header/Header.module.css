@@ -1,8 +1,15 @@
 .header {
-    grid-area: h;
-    
-    background-color: lightblue;
-  }
-  .header img {
-    height: 100%;
-  }
+  grid-area: h;
+  background-color: lightblue;
+  display: flex;
+  justify-content: space-between;
+}
+.header img {
+  height: 100%;
+}
+.nav {
+  width: 110px;
+}
+.loginBlock {
+  color: aliceblue;
+}

@@ -4,6 +4,7 @@ import css from "./Users.module.css";
 import userAva from "../../assets/images/ava.png";
 import { NavLink } from "react-router-dom";
 
+
 const Users = (props) => {
    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
    let pages = [];
@@ -14,12 +15,12 @@ const Users = (props) => {
    return (
       <Container>
          <Paginator>
-            {pages.map((p) => (
-               <PageNumber
-                  onClick={() => props.onPageChange(p)}
-                  className={props.currentPage === p && css.selectedPage}
+            {pages.map((page) => (
+               <PageNumber key={page}
+                  onClick={() => props.onPageChange(page)}
+                  className={props.currentPage === page && css.selectedPage}
                >
-                  {p}
+                  {page}
                </PageNumber>
             ))}
          </Paginator>
@@ -27,26 +28,18 @@ const Users = (props) => {
             return (
                <User key={user.id}>
                   <Avatar>
-                     <NavLink to={{pathname:`/profile/${user.id}`, state: {user}}}>
+                     <NavLink to={{ pathname: `/profile/${user.id}`, state: { user } }}>
                         <Image src={user.photos.small ? user.photos.small : userAva} alt="avatar" />
                      </NavLink>
-                     {user.follow ? (
-                        <Unfollow
-                           onClick={() => {
-                              props.unfollow(user.id);
-                           }}
-                        >
-                           Unfollow
-                        </Unfollow>
+                     {!user.follow ? (
+                        <Follow disabled={props.followInProgress.some(id => id === user.id)}
+                           onClick={ () => props.follow(user.id) }
+                        > Follow </Follow>
                      ) : (
-                        <Follow
-                           onClick={() => {
-                              props.follow(user.id);
-                           }}
-                        >
-                           Follow
-                        </Follow>
-                     )}
+                           <Unfollow disabled={props.followInProgress.some(id => id === user.id)}
+                              onClick={ () => props.unfollow(user.id) }
+                           > Unfollow </Unfollow>
+                        )}
                   </Avatar>
                   <Details>
                      <UserData>
@@ -130,6 +123,7 @@ const City = styled.div`
 const Paginator = styled.div`
    display: flex;
    justify-content: center;
+   flex-wrap: wrap
 `;
 const PageNumber = styled.span`
    font-size: x-small;

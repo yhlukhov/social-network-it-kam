@@ -1,3 +1,4 @@
+import { Redirect } from "react-router-dom";
 import MyPostsContainer from "./AllPosts/MyPostsContainer";
 import css from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";

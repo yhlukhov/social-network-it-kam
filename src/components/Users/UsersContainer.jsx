@@ -3,36 +3,23 @@ import React from "react";
 import Users from "./Users";
 import { connect } from "react-redux";
 import {
-   follow,
-   unfollow,
-   setUsers,
    setCurrentPage,
-   setTotalCount,
-   loadPage,
+   toggleFollowInProgress,
+   getUsers,
+   follow,
+   unfollow
 } from "../../redux/usersReducer";
 import Preloader from "../Common/Preloader/Preloader";
 
+
 class UsersContainer extends React.Component {
    componentDidMount = () => {
-      this.props.loadPage(true);
-      Axios.get(
-         `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      ).then((resp) => {
-         this.props.setUsers(resp.data.items);
-         this.props.setTotalCount(resp.data.totalCount);
-         this.props.loadPage(false);
-      });
+      this.props.getUsers(this.props.currentPage, this.props.pageSize)
    };
 
-   onPageChange = (p) => {
-      this.props.setCurrentPage(p);
-      this.props.loadPage(true);
-      Axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`).then(
-         (resp) => {
-            this.props.setUsers(resp.data.items);
-            this.props.loadPage(false);
-         }
-      );
+   onPageChange = (page) => {
+      this.props.setCurrentPage(page);
+      this.props.getUsers(page, this.props.pageSize)
    };
 
    render() {
@@ -46,6 +33,7 @@ class UsersContainer extends React.Component {
                users={this.props.users}
                follow={this.props.follow}
                unfollow={this.props.unfollow}
+               followInProgress={this.props.followInProgress}
                onPageChange={this.onPageChange}
             />
          </div>
@@ -60,16 +48,17 @@ const mapStateToProps = (state) => {
       totalUsersCount: state.usersPage.totalUsersCount,
       currentPage: state.usersPage.currentPage,
       loading: state.usersPage.loading,
+      followInProgress: state.usersPage.followInProgress,
+      
    };
 };
 
 const ActionCreators = {
-   setUsers,
-   follow,
-   unfollow,
    setCurrentPage,
-   setTotalCount,
-   loadPage,
+   toggleFollowInProgress,
+   getUsers,
+   follow,
+   unfollow
 };
 
 export default connect(mapStateToProps, ActionCreators)(UsersContainer);

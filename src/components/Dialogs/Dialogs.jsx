@@ -3,18 +3,20 @@ import DialogItem from "./DialogItem/DialogItem";
 import style from "./Dialogs.module.css";
 import Message from "./Message/Message";
 import styled, {css} from "styled-components";
+import { Redirect } from "react-router-dom";
 
 let messageRef = React.createRef()
-
-
 
 const Dialogs = ({
   dialogs,
   messages,
   newMessageText,
   newMessageChange,
-  sendMessage
+  sendMessage,
+  isAuth
 }) => {
+  
+  if (!isAuth) return <Redirect to={'login'} />
   
   const dialogItems = dialogs.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} img={dialog.img} />

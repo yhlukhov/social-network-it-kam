@@ -1,7 +1,9 @@
 import faker from 'faker';
+import { usersAPI } from '../API/api';
 
 const ADD_POST = "ADD-POST";
 const SET_NEW_POST_TEXT = "SET-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE"
 
 let initialState = {
    posts: [
@@ -45,20 +47,21 @@ const profileReducer = (state = initialState, action) => {
                likesCount: 0
             }]
          }
-         
+
       case SET_NEW_POST_TEXT:
          return {
             ...state,
             posts: [...state.posts],
             newPostText: action.newPostText
          }
-      case 'SET_USER_PROFILE':
+      case SET_USER_PROFILE:
          return {
             ...state,
             userProfile: action.userProfile
          }
-		default: return state
-	}
+
+      default: return state
+   }
 };
 
 
@@ -73,11 +76,19 @@ export const setNewPostTextActionCreator = (text) => {
    };
 };
 
+export const getUserProfile = (userId) => (dispatch) => {
+   usersAPI.getProfile(userId)
+      .then(resp => {
+         //console.log(resp)
+         dispatch(setUserProfile(resp))
+      })
+}
+
 export const setUserProfile = (userProfile) => {
-	return {
-		type: 'SET_USER_PROFILE',
-		userProfile
-	}
+   return {
+      type: SET_USER_PROFILE,
+      userProfile
+   }
 }
 
 

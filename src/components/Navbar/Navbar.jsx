@@ -37,16 +37,6 @@ const Navbar = () => {
                   Settings
                </NavLink>
             </div>
-            <div className={css.item}>
-               <NavLink to="/styled" activeClassName={css.activeLink}>
-                  StyledComponents
-               </NavLink>
-            </div>
-            <div className={css.item}>
-               <NavLink to="/styled2" activeClassName={css.activeLink}>
-                  StyledComponents2
-               </NavLink>
-            </div>
          </nav>
          <FriendsContainer />
       </div>
