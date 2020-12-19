@@ -68,28 +68,24 @@ const dialogsReducer = (state = initialState, action) => {
          }
       }
       case SET_NEW_MESSAGE_TEXT: {
-         const stateCopy = {
-            ...state,
-            newMessageText: state.newMessageText
-         };
-         stateCopy.newMessageText = action.newMessageText;
          return {
             ...state,
-            
-         }
+            newMessageText: action.newMessageText
+         };
       }
       default:
          return state;
    }
 };
 
-export const onSendMessageClickActionCreator = () => {
+export const sendMessage = () => {
    return {
       type: SEND_MESSAGE,
    };
 };
 
-export const onNewMessageChangeActionCreator = (text) => {
+export const newMessageChange = (text) => {
+   console.log(text)
    return {
       type: SET_NEW_MESSAGE_TEXT,
       newMessageText: text,
