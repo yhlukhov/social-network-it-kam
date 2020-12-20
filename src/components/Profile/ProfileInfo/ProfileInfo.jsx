@@ -4,18 +4,20 @@ import Preloader from "../../Common/Preloader/Preloader";
 import ProfileBanner from "./ProfileBanner";
 import iconYes from "../../../assets/images/yes.png";
 import iconNo from "../../../assets/images/no.png";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
    if (!props.userProfile) return <Preloader status={true} />;
 
    return (
-      <div>
+      <div style={{marginBottom: "15px"}}>
          <ProfileBanner img={props.img} />
          <Profile>
             <img src={props.userProfile.photos?.large} alt="profile pic" />
             <div style={{ marginLeft: "10px" }}>
                <div style={{fontWeight: "bold"}}>{props.userProfile.fullName}</div>
                <div>{props.userProfile.aboutMe}</div>
+               
                <div>
                   Looking for a job:
                   <img src={props.userProfile.lookingForAJob ? iconYes : iconNo} alt="looking job" />
@@ -33,6 +35,11 @@ const ProfileInfo = (props) => {
                <div>Website: {props.userProfile.contacts.website}</div>
             </div>
          </Profile>
+         <div><ProfileStatus
+            userId={props.userProfile.userId}
+            status={props.profileStatus}
+            updateProfileStatus={props.updateProfileStatus}
+         /></div>
       </div>
    );
 };

@@ -15,10 +15,6 @@ export const usersAPI = {
          { withCredentials: true }
       ).then(resp => resp.data)
    },
-   getProfile: (userId) => {
-      return axios.get(`profile/${userId || 2}`)
-         .then(resp => resp.data)
-   },
    follow: (userId) => {
       return axios.post(
          `follow/${userId}`, null,
@@ -34,5 +30,18 @@ export const usersAPI = {
 export const authAPI = {
    me: () => {
       return axios.get("auth/me").then(resp => resp.data)
+   }
+}
+
+export const profileAPI = {
+   getProfile: (userId) => {
+      return axios.get(`profile/${userId || 2}`)
+         .then(resp => resp.data)
+   },
+   getStatus: (userId) => {
+      return axios.get(`profile/status/${userId}`)
+   },
+   updateStatus: (status) => {//user id не указываем, оно само возьмет из куки!?
+      return axios.put(`profile/status`, {status: status})
    }
 }
