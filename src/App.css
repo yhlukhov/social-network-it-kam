@@ -1,3 +1,5 @@
+@import './assets/250.Fonts/fonts.css';
+
 .app-wrapper {
   display: grid;
 
@@ -13,3 +15,4 @@
   grid-area: c;
   background-color: cornflowerblue;
 }
+

@@ -30,6 +30,15 @@ export const usersAPI = {
 export const authAPI = {
    me: () => {
       return axios.get("auth/me").then(resp => resp.data)
+   },
+   login: (email, password) => {
+      return axios.post(
+         `auth/login`,
+         {
+            email,
+            password
+         }
+      )
    }
 }
 

@@ -37,6 +37,11 @@ const Navbar = () => {
                   Settings
                </NavLink>
             </div>
+            <div className={css.item}>
+               <NavLink to="/fonts" activeClassName={css.activeLink}>
+                  FontsTest
+               </NavLink>
+            </div>
          </nav>
          <FriendsContainer />
       </div>
