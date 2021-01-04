@@ -1,47 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+const ProfileStatus = (props) => {
+	const [editMode, setEditMode] = useState(false)
+	const [status, setStatus] = useState(props.status)
 
-class ProfileStatus extends React.Component {
-	state = {
-		editMode: false,
-		status: this.props.status
-	};
-
-	activateEditMode = () => {
-		this.setState({editMode: true})
-	}
-	deactivateEditMode = () => {
-		this.props.updateProfileStatus(this.state.status)
-		this.setState({editMode: false})
+	const activateEditMode = () => {
+		setEditMode(true)
 	}
 
-	onStatusChange = (e) => {
-		this.setState({status: e.currentTarget.value})
+	const deactivateEditMode = () => {
+		props.updateProfileStatus(status)
+		setEditMode(false)
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if(prevProps.status !== this.props.status) {
-			this.setState({status: this.props.status})
-		}
+	const onStatusChange = (e) => {
+		setStatus(e.currentTarget.value)
 	}
 
-   render() {
+	useEffect(() => {
+		// не заню чи це потрібно і як правильно написати
+		setStatus(props.status)
+	},[props.status])
+
       return (
          <div>
-            {this.state.editMode &&
+            {editMode &&
                <div>
-                  <input onChange={this.onStatusChange} onBlur={this.deactivateEditMode} value={this.state.status} autoFocus={true} />
+                  <Textarea onChange={onStatusChange} onBlur={deactivateEditMode} value={status} autoFocus={true} />
                </div>
             }
-            {!this.state.editMode &&
+            {!editMode &&
                <Status>
-                  <div onDoubleClick={this.activateEditMode}>{this.props.status}</div>
+                  <div onDoubleClick={activateEditMode}>{props.status}</div>
                </Status>
             }
          </div>
       );
-   }
 }
 
 export default ProfileStatus;
@@ -51,6 +46,13 @@ export default ProfileStatus;
 const Status = styled.div`
 	margin: 5px;
 	padding: 0 0 1px 3px;
-	border: 1px solid greenyellow;
+	border: 2px solid #cbff7e;
 	border-radius: 3px;
+`
+const Textarea = styled.input`
+	width: 200px;
+   height: 30px;
+   border: 1px solid lightblue;
+   border-bottom-left-radius: 5px;
+   border-top-left-radius: 5px;
 `

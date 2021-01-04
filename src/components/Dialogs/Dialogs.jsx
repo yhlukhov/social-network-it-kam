@@ -2,15 +2,38 @@ import React from "react";
 import DialogItem from "./DialogItem/DialogItem";
 import style from "./Dialogs.module.css";
 import Message from "./Message/Message";
-import styled, {css} from "styled-components";
+import { Form, Field } from "react-final-form";
+import styled from "styled-components";
+import { TextInput } from "../Common/FormControls/FormControls";
+import { composeValidators, maxLength, required } from "../../utils/validators";
 
-let messageRef = React.createRef()
+const NewMessageForm = ({
+  sendMessage,
+}) => {
+  const onSubmit = (values) => {
+    sendMessage(values.messageText)
+  }
+  return (
+    <Form onSubmit={onSubmit}
+      render={({handleSubmit}) => (
+        <form onSubmit={handleSubmit} style={{display:"flex"}}>
+          <Field name="messageText" validate={composeValidators(required, maxLength(20))} >
+            {
+              ({input, meta}) => (
+                <TextInput input={input} meta={meta} />
+              )
+            }
+          </Field>
+          <ButtonSend type="submit">Send message</ButtonSend>
+        </form>
+      )}
+    />
+  )
+}
 
 const Dialogs = ({
   dialogs,
   messages,
-  newMessageText,
-  newMessageChange,
   sendMessage,
 }) => {
   
@@ -26,14 +49,7 @@ const Dialogs = ({
       <div className={style.dialogsItems}>{dialogItems}</div>
       <div className={style.messages}>
         {messageItems}
-        <div className={style.newMessage}>
-          <Textarea ref={messageRef} value={newMessageText}
-            onChange={()=>{
-              newMessageChange(messageRef.current.value)
-            }}
-          ></Textarea>
-          <ButtonSend onClick={sendMessage} primary>Send message</ButtonSend>
-        </div>
+        <NewMessageForm sendMessage={sendMessage} />
       </div>
     </div>
   );
@@ -42,18 +58,11 @@ const Dialogs = ({
 
 //* ------------ BLOCK CSS ------------- //
 
-const Textarea = styled.textarea`
-  width: 200px;
-  border: 1px solid lightblue;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-`;
 const ButtonSend = styled.button`
+  height: 34px;
   border: 1px solid lightblue;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
-  ${props => props.primary && css`background: palevioletred; color: white`}
-  ${props => props.secondary && css`background: palegoldenrod; color: white`}
 `;
 
 

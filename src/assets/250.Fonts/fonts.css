@@ -1,24 +1,12 @@
 @font-face {
-   font-family: aktau;
-   src: url('./Aktau.ttf');
- }
- @font-face {
    font-family: burlak;
-   src: url('./Burlak.ttf');
- }
- @font-face {
-   font-family: grunge;
-   src: url('./GRUNGE.TTF');
- }
- @font-face {
+   src: url("./Burlak.ttf");
+}
+@font-face {
    font-family: drpodr;
-   src: url('./drpodr.ttf');
- }
- @font-face {
-   font-family: karmen;
-   src: url('./Karmen.ttf');
- }
- @font-face {
+   src: url("./drpodr.ttf");
+}
+@font-face {
    font-family: rurintania;
-   src: url('./Rurintania.ttf');
- }
+   src: url("./Rurintania.ttf");
+}

@@ -11,7 +11,7 @@ const ProfileInfo = (props) => {
 
    return (
       <div style={{marginBottom: "15px"}}>
-         <ProfileBanner img={props.img} />
+         <ProfileBanner />
          <Profile>
             <img src={props.userProfile.photos?.large} alt="profile pic" />
             <div style={{ marginLeft: "10px" }}>

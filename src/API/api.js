@@ -31,14 +31,18 @@ export const authAPI = {
    me: () => {
       return axios.get("auth/me").then(resp => resp.data)
    },
-   login: (email, password) => {
+   login: (email, password, remember=false) => {
       return axios.post(
          `auth/login`,
          {
             email,
-            password
+            password,
+            remember
          }
       )
+   },
+   logout: () => {
+      return axios.delete(`auth/login`)
    }
 }
 

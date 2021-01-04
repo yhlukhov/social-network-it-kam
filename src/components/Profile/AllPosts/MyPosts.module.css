@@ -1,18 +1,17 @@
-.posts {
-   
-}
-
 .addPost {
    display: flex;
+   margin: 5px;
 }
-.addPost textarea {
+.textField {
    font-size: large;
    width: 200px;
+   height: 30px;
    border: 1px solid lightblue;
    border-bottom-left-radius: 5px;
    border-top-left-radius: 5px;
 }
-.addPost button {
+.submitBtn {
+   height: 56px;
    border: 1px solid lightblue;
    border-bottom-right-radius: 5px;
    border-top-right-radius: 5px;
